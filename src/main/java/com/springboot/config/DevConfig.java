@@ -9,9 +9,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.secretsmanager.AWSSecretsManager;
+import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.springboot.aws.AWSSecretsManagerUtils;
 import com.springboot.credentials.DbSecret;
 import com.zaxxer.hikari.HikariConfig;
@@ -29,6 +32,20 @@ public class DevConfig {
 	public AWSCredentialsProvider amazonAWSCredentialsProvider() {
 		
 		return DefaultAWSCredentialsProviderChain.getInstance();
+	}
+	
+	@Bean
+	public AWSSecretsManager awsSecretsManager() {
+		String endpoint = "secretsmanager.us-east-1.amazonaws.com";
+		
+		AWSSecretsManager client = AWSSecretsManagerClientBuilder
+				.standard()
+				.withCredentials(amazonAWSCredentialsProvider())
+				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint,
+						Regions.US_WEST_2.getName()))
+				.build();
+		
+		return client;
 	}
 
 	@Bean
