@@ -27,7 +27,7 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.springboot.product.size.MonomonoSize;
+import com.springboot.product.size.TShirtSize;
 import com.springboot.utils.ApiSessionUtils;
 
 /**
@@ -261,7 +261,7 @@ public class Product implements Serializable {
 		if(this.sizes == null){
 			this.sizes = new HashSet<>();
 		}
-		if(size!=null && MonomonoSize.isValid(size)) {
+		if(size!=null && TShirtSize.isValid(size)) {
 			this.sizes.add(size);
 		}
 	}

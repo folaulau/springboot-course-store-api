@@ -36,16 +36,13 @@ public class DevConfig {
 	
 	@Bean
 	public AWSSecretsManager awsSecretsManager() {
-		String endpoint = "secretsmanager.us-east-1.amazonaws.com";
-		
-		AWSSecretsManager client = AWSSecretsManagerClientBuilder
+		AWSSecretsManager awsSecretsManager = AWSSecretsManagerClientBuilder
 				.standard()
 				.withCredentials(amazonAWSCredentialsProvider())
-				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint,
-						Regions.US_WEST_2.getName()))
+				.withRegion(Regions.US_WEST_2)
 				.build();
 		
-		return client;
+		return awsSecretsManager;
 	}
 
 	@Bean

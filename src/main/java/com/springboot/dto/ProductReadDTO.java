@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.springboot.product.size.MonomonoSize;
+import com.springboot.product.size.TShirtSize;
 import com.springboot.utils.MathUtils;
 
 @JsonInclude(value = Include.NON_NULL)
@@ -193,24 +193,29 @@ public class ProductReadDTO {
 		if (this.sizes != null && this.sizes.size() > 0) {
 			StringBuilder strSize = new StringBuilder();
 
-			if (sizes.contains(MonomonoSize.CRIB.getTitle())) {
-				strSize.append(", " + MonomonoSize.CRIB.getTitle());
+			if (sizes.contains(TShirtSize.SMALL.getTitle())) {
+				strSize.append(", " + TShirtSize.SMALL.getTitle());
 			}
-			if (sizes.contains(MonomonoSize.TWIN.getTitle())) {
-				strSize.append(", " + MonomonoSize.TWIN.getTitle());
+			if (sizes.contains(TShirtSize.MEDIUM.getTitle())) {
+				strSize.append(", " + TShirtSize.MEDIUM.getTitle());
 			}
-			if (sizes.contains(MonomonoSize.FULL.getTitle())) {
-				strSize.append(", " + MonomonoSize.FULL.getTitle());
+			if (sizes.contains(TShirtSize.LARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.LARGE.getTitle());
 			}
-			if (sizes.contains(MonomonoSize.QUEEN.getTitle())) {
-				strSize.append(", " + MonomonoSize.QUEEN.getTitle());
+			if (sizes.contains(TShirtSize.XLARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.XLARGE.getTitle());
 			}
-			if (sizes.contains(MonomonoSize.KING.getTitle())) {
-				strSize.append(", " + MonomonoSize.KING.getTitle());
+			if (sizes.contains(TShirtSize.X2LARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.X2LARGE.getTitle());
 			}
-			
-			if (sizes.contains(MonomonoSize.CALI_KING.getTitle())) {
-				strSize.append(", CALI KING");
+			if (sizes.contains(TShirtSize.X3LARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.X3LARGE.getTitle());
+			}
+			if (sizes.contains(TShirtSize.X4LARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.X4LARGE.getTitle());
+			}
+			if (sizes.contains(TShirtSize.X5LARGE.getTitle())) {
+				strSize.append(", " + TShirtSize.X5LARGE.getTitle());
 			}
 			this.sizeAsString = strSize.toString().substring(2);
 		}

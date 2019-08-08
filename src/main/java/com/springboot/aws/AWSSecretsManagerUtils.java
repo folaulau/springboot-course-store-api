@@ -27,18 +27,26 @@ public class AWSSecretsManagerUtils {
 	private AWSSecretsManager awsSecretsManager;
 
 	public DbSecret getDbSecret() {
-
+		return DbSecret.fromJson(getCredentials(dataSourceSecretName));
+	}
+	
+	private String getCredentials(String secretId) {
+		
 		GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest();
-		getSecretValueRequest.setSecretId(dataSourceSecretName);
+		getSecretValueRequest.setSecretId(secretId);
 
 		GetSecretValueResult getSecretValueResponse = null;
+		
 		try {
+			
 			getSecretValueResponse = awsSecretsManager.getSecretValue(getSecretValueRequest);
+			
 		} catch (Exception e) {
 			log.error("Exception, msg: ", e.getMessage());
 		}
 
 		if (getSecretValueResponse == null) {
+			log.error("secret value response is null");
 			return null;
 		}
 
@@ -50,11 +58,12 @@ public class AWSSecretsManagerUtils {
 		if (getSecretValueResponse.getSecretString() != null) {
 			log.info("secret string");
 			secret = getSecretValueResponse.getSecretString();
-			return DbSecret.fromJson(secret);
 		} else {
 			log.info("secret binary secret data");
 			binarySecretData = getSecretValueResponse.getSecretBinary();
-			return DbSecret.fromJson(binarySecretData.toString());
+			secret = binarySecretData.toString();
 		}
+		
+		return secret;
 	}
 }
